@@ -1,6 +1,7 @@
 import React from 'react';
 import Hero from './sections/Hero';
 import About from './sections/About';
+import Experience from './sections/Experience';
 import Projects from './sections/Projects';
 
 function App() {
@@ -12,7 +13,8 @@ function App() {
           <div className="flex gap-6 text-sm font-medium text-gray-300">
             <a href="#hero" className="hover:text-white transition-colors">Home</a>
             <a href="#about" className="hover:text-white transition-colors">About</a>
-            <a href="#projects" className="hover:text-white transition-colors">Experience</a>
+            <a href="#experience" className="hover:text-white transition-colors">Experience</a>
+            <a href="#projects" className="hover:text-white transition-colors">Projects</a>
           </div>
         </div>
       </nav>
@@ -20,6 +22,7 @@ function App() {
       <main>
         <Hero />
         <About />
+        <Experience />
         <Projects />
       </main>
 

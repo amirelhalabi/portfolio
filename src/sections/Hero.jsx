@@ -1,12 +1,10 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { profile } from '../data/profile';
-import Ballpit from '../components/Visuals/Ballpit';
 
 const Hero = () => {
     return (
         <section id="hero" className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-b from-black to-gray-900 text-white relative overflow-hidden">
-            <Ballpit />
             <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20"></div>
 
             <motion.div
