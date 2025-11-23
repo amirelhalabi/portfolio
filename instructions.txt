@@ -1,0 +1,195 @@
+PROJECT BLUEPRINT: 3D INTERACTIVE PORTFOLIO
+
+1. PROJECT CONTEXT & OBJECTIVES
+-------------------------------
+- Goal: Build a high-fidelity personal portfolio with 3D animations.
+- Target Audience: Recruiters and technical hiring managers.
+- Hosting: GitHub Pages (Static hosting).
+- Version Control: Git (Managed via Git Extensions).
+- Primary Constraint: Must be a Client-Side Rendered (CSR) Single Page Application.
+- Personal Brand: Java Backend Developer specializing in scalable microservices, seeking to showcase full-stack capabilities.
+
+2. TECHNICAL STACK DEFINITION
+-----------------------------
+The AI Agent should utilize the following technologies:
+- Core: React 18+ (via Vite).
+- Language: JavaScript (ES6+).
+- Styling: Tailwind CSS (for layout) + Custom CSS (for complex animations).
+- Animation Engine: Framer Motion (Physics & Transitions).
+- Visual Component Library: React Bits (Micro-interactions & 3D Backgrounds).
+- Build/Deploy: `gh-pages` (npm package) for GitHub Pages deployment.
+
+3. IMPLEMENTATION ROADMAP
+-------------------------
+
+PHASE A: INITIALIZATION & DEPENDENCIES
+Execute the following commands to scaffold the project:
+
+  # 1. Initialize Vite Project
+  npm create vite@latest portfolio-amir -- --template react
+
+  # 2. Install Core Dependencies
+  cd portfolio-amir
+  npm install
+
+  # 3. Install Design & Animation Dependencies
+  npm install framer-motion tailwindcss postcss autoprefixer sass
+  npm install gh-pages --save-dev
+
+  # 4. Initialize Tailwind
+  npx tailwindcss init -p
+
+PHASE B: ARCHITECTURE & FOLDER STRUCTURE
+The project must adhere to this strict directory structure:
+
+  src/
+  ├── assets/              # Images and Icons
+  ├── components/
+  │   ├── UI/              # Standard atomic components (Buttons, Cards)
+  │   └── Visuals/         # REACT BITS components (e.g., Ballpit.jsx)
+  ├── sections/            # Semantic Page Sections (Hero, About, Projects)
+  ├── data/                # Static Data Files (JSON/JS objects)
+  ├── hooks/               # Custom Hooks (useScroll, etc.)
+  ├── App.jsx
+  ├── main.jsx
+  └── index.css
+  public/
+  └── resume.pdf           # Static resume file
+
+PHASE C: CONFIGURATION FILES
+
+1. Tailwind Configuration (tailwind.config.js):
+   Configure content paths to include all source files.
+   
+   export default {
+     content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
+     theme: { extend: {} },
+     plugins: [],
+   }
+
+2. CSS Entry Point (src/index.css):
+   Inject Tailwind directives.
+   
+   @tailwind base;
+   @tailwind components;
+   @tailwind utilities;
+
+3. Vite Configuration (vite.config.js):
+   CRITICAL: The `base` property must match the GitHub repository name.
+   
+   import { defineConfig } from 'vite'
+   import react from '@vitejs/plugin-react'
+   
+   // REPLACE 'repository-name' WITH THE ACTUAL GITHUB REPO NAME
+   export default defineConfig({
+     plugins: [react()],
+     base: '/repository-name/',
+   })
+
+4. Package.json Scripts:
+   Add deployment scripts.
+   
+   "homepage": "https://<your-username>.github.io/<repository-name>",
+   "scripts": {
+     "dev": "vite",
+     "build": "vite build",
+     "predeploy": "npm run build",
+     "deploy": "gh-pages -d dist"
+   }
+
+PHASE D: DATA MANAGEMENT STRATEGY (PERSONALIZED)
+The AI Agent must populate `src/data/` with the following extracted content.
+
+1. Profile Data (`src/data/profile.js`):
+   export const profile = {
+     name: "Amir El Halabi",
+     role: "Java Backend Developer",
+     contact: {
+       email: "amir619halabi@gmail.com",
+       phone: "+961 81077357",
+       linkedin: "https://www.linkedin.com/in/amir-el-halabi/"
+     },
+     summary: "Specializing in Spring Boot microservices and scalable enterprise architectures. Experienced in RESTful API design, database optimization (MySQL, Oracle, PostgreSQL), and Angular front-end integration. Committed to clean architecture, performance optimization, and reliable 24/7 production support."
+   };
+
+2. Projects & Experience (`src/data/experience.js`):
+   export const experiences = [
+     {
+       id: "shelvz",
+       role: "Intermediate Backend Developer",
+       company: "Shelvz",
+       date: "Jan 2025 - Jul 2025",
+       description: "Delivered scalable F&B backend system supporting thousands of daily transactions.",
+       tech: ["Java 21", "Spring Boot 3", "MySQL", "Docker", "Kubernetes", "GitLab CI/CD"],
+       achievements: [
+         "Architected RESTful APIs integrated with MySQL for web/mobile.",
+         "Integrated Twilio WhatsApp APIs for real-time notifications.",
+         "Managed CI/CD pipelines and Sentry monitoring."
+       ]
+     },
+     {
+       id: "pwr-labs",
+       role: "Backend Developer",
+       company: "PWR Labs",
+       date: "Aug 2024 - Jul 2025",
+       description: "Delivered a blockchain-based CBDC distribution platform enabling real-time fund tracking.",
+       tech: ["Java", "Multithreading", "PostgreSQL", "AWS S3", "Blockchain", "JWT"],
+       achievements: [
+         "Designed backend for government-grade financial aid systems.",
+         "Built RESTful APIs powering staking and airdrop modules.",
+         "Integrated AWS S3 for file storage and SLF4J for observability."
+       ]
+     },
+     {
+       id: "inspire",
+       role: "BPM Software Developer",
+       company: "Inspire Innovations",
+       date: "Oct 2023 - Aug 2024",
+       description: "Upgraded MetLife's enterprise applications from legacy frameworks to modern Angular/Spring Boot.",
+       tech: ["Spring Boot", "Angular", "Azure DevOps", "Hibernate"],
+       achievements: [
+         "Led backend migration of BizFlow system.",
+         "Remediated all Veracode vulnerabilities.",
+         "Migrated build system from Ant to Maven."
+       ]
+     },
+     {
+       id: "ibc",
+       role: "Technical Consultant",
+       company: "IBC Solutions",
+       date: "Apr 2023 - Oct 2023",
+       description: "Key contributor to Capital Bank of Jordan's FCC revamp project.",
+       tech: ["Java Spring Boot", "Oracle SQL", "SoapUI", "Figma"],
+       achievements: [
+         "Customized Finastra FCC product for banking workflows.",
+         "Integrated Oracle SQL databases with stored procedures.",
+         "Upgraded UI from Dojo to Angular."
+       ]
+     }
+   ];
+
+3. Skills (`src/data/skills.js`):
+   export const skills = {
+     languages: ["Java (OOP, Multithreading)", "TypeScript/JavaScript", "SQL", "Python", "HTML/CSS"],
+     frameworks: ["Spring Boot (MVC, Data JPA, Security)", "Hibernate", "Angular/AngularJS"],
+     databases: ["MySQL", "PostgreSQL", "Oracle", "MongoDB"],
+     devops: ["GitLab", "Azure DevOps", "Docker", "Kubernetes", "Jenkins", "AWS"],
+     tools: ["Postman", "SoapUI", "Junit 5", "Mockito", "Sentry"]
+   };
+
+PHASE E: DEPLOYMENT WORKFLOW
+----------------------
+Since the user utilizes Git Extensions:
+1. Commit changes to the `main` branch locally.
+2. Push `main` to GitHub.
+3. Run `npm run deploy` in the terminal.
+   (This builds the project to a `dist` folder and pushes ONLY that folder to the `gh-pages` branch).
+4. GitHub Pages serves the site from the `gh-pages` branch automatically.
+
+NOTE ON GITIGNORE:
+The user should select the "Node" template when creating the repository on GitHub.
+It correctly excludes:
+- node_modules/
+- dist/
+- .env
+- logs
